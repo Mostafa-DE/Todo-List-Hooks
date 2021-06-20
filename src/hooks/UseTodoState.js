@@ -1,7 +1,7 @@
 import UseLocalStorageState from './UseLocalStorageState';
 import uuid from 'uuid/dist/v4';
 
-    
+// eslint-disable-next-line    
 export default initialTodos => {
     const [todos, setTodos] = UseLocalStorageState("todos",initialTodos);
 
