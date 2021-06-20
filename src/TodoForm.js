@@ -2,12 +2,15 @@ import React from 'react'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import useInputState from './hooks/useInputState';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Button from '@material-ui/core/Button';
-function TodoForm({ addTodo }) {
+import { withStyles } from '@material-ui/core/styles';
+import styles from './Styles/TodoFormStyle';
+
+
+function TodoForm({ addTodo , classes }) {
     const [value, handleChange, reset] = useInputState("");
     return (
-        <Paper style={{margin: "1rem 0", padding: "0 1rem 1rem 1rem"}}>
+        <Paper className={classes.root}>
             
          <form onSubmit={ (evnt) => {
              evnt.preventDefault();
@@ -27,7 +30,7 @@ function TodoForm({ addTodo }) {
                 type="submit" 
                 variant="outlined" 
                 color="primary" 
-                style={{marginTop: "0.5rem"}} 
+                className={classes.btn} 
             >
                 Add
             </Button>
@@ -38,4 +41,4 @@ function TodoForm({ addTodo }) {
     )
 }
 
-export default TodoForm;
+export default withStyles(styles) (TodoForm);
