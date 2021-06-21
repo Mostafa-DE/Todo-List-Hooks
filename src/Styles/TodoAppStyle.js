@@ -2,7 +2,7 @@ const styles = {
     root: {
         padding: 0,
         margin: 0,
-        height: "100vh",
+        height: "300vh",
         backgroundColor: "#fafafa"
     },
     navAppBar: {

@@ -1,8 +1,8 @@
 import UseLocalStorageState from './UseLocalStorageState';
 import uuid from 'uuid/dist/v4';
-
-// eslint-disable-next-line    
-export default initialTodos => {
+import { arrayMove } from "react-sortable-hoc";
+  
+const useTodoState = initialTodos => {
     const [todos, setTodos] = UseLocalStorageState("todos",initialTodos);
 
     const addTodo = newTodoText => {
@@ -30,14 +30,20 @@ export default initialTodos => {
         setTodos(updateTodo);
     }
 
+    const onSortEnd = ({ oldIndex, newIndex }) => setTodos(arrayMove(todos, oldIndex, newIndex));
+
+
     return {
         todos,
         addTodo,
         removeTodo,
         isCompletedTodo,
-        editTodo
+        editTodo,
+        onSortEnd
     }
 }
+
+export default useTodoState;
 
 
 

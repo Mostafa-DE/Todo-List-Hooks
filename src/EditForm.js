@@ -1,39 +1,40 @@
-import React from 'react'
-import TextField from '@material-ui/core/TextField';
+import React from 'react';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+// import TextField from '@material-ui/core/TextField';
 import useInputState from './hooks/useInputState';
-import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './Styles/EditFormstyle';
 
 
 function EditForm({editTodo, id, task,toggleEditForm, classes}) {
     const [value, handleChange, reset] = useInputState(task);
-
     return (
         <div>
-            <form onSubmit={ (evnt) => {
+            <ValidatorForm onSubmit={ (evnt) => {
                 evnt.preventDefault();
                 editTodo(id,value);
                 reset();
                 toggleEditForm();
 
             }}>
-            <TextField 
+            <TextValidator 
                 value={value} 
                 onChange={handleChange} 
                 label="update To-do"
                 fullWidth
-                className={classes.inputText} 
+                className={classes.inputText}
+                validators={['required']}
+                errorMessages={['Please Enter A To-Do']}
             />
-            <Button 
+            <button 
                 type="submit" 
-                variant="outlined" 
-                color="primary" 
-                className={classes.btn} 
+                
+                 
+                className={classes.updateBtn} 
             >
                 Update
-            </Button>
-            </form>
+            </button>
+            </ValidatorForm>
         </div>
     )
 }

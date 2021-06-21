@@ -1,10 +1,11 @@
 import React from 'react'
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import useInputState from './hooks/useInputState';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './Styles/TodoFormStyle';
+
 
 
 function TodoForm({ addTodo , classes }) {
@@ -12,19 +13,21 @@ function TodoForm({ addTodo , classes }) {
     return (
         <Paper className={classes.root}>
             
-         <form onSubmit={ (evnt) => {
+         <ValidatorForm onSubmit={ (evnt) => {
              evnt.preventDefault();
              addTodo(value);
              reset();
              
          }}>
             
-            <TextField 
+            <TextValidator 
                 value={value} 
                 onChange={handleChange} 
                 margin="normal" 
                 label="Add New To-do"
-                fullWidth 
+                fullWidth
+                validators={['required']}
+                errorMessages={['Please Enter A New To-Do']}
             />
             <Button 
                 type="submit" 
@@ -35,7 +38,7 @@ function TodoForm({ addTodo , classes }) {
                 Add
             </Button>
             
-         </form>
+         </ValidatorForm>
             
         </Paper>
     )

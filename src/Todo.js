@@ -2,16 +2,18 @@ import React from 'react'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import UseToggleState from './hooks/UseToggleState';
 import EditForm from './EditForm';
+import { SortableElement } from 'react-sortable-hoc';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './Styles/TodoStyle';
 
-function Todo({ task, completed, removeTodo, id, isCompletedTodo, editTodo}) {
+const Todo = SortableElement(({ task, completed, removeTodo, id, isCompletedTodo, editTodo, classes}) => {
     const [isEditing, toggleIsEditing] = UseToggleState(false);
     return (
+        <Paper>
         <ListItem>
             { isEditing === true ? 
             <EditForm 
@@ -22,21 +24,30 @@ function Todo({ task, completed, removeTodo, id, isCompletedTodo, editTodo}) {
                 toggleEditForm={toggleIsEditing} 
             /> 
             :(
-            <>
-            <ListItemText style={{textDecoration: completed === true ? "line-through" : "none"}}>
-                <Checkbox tabIndex={-1} checked={completed}  onClick={() => isCompletedTodo(id)} color="primary" /> {task} </ListItemText>
+            <div>
+                
+                <ListItemText style={{textDecoration: completed === true ? "line-through" : "none"}}>
+                <Checkbox className={classes.checkBox} tabIndex={-1} checked={completed}  onClick={() => isCompletedTodo(id)} color="primary" /> {task} 
+                </ListItemText>
+                
                 <ListItemSecondaryAction>
-                    <IconButton aria-label="Edit" onClick={toggleIsEditing}>
-                        <EditIcon color="primary"  />
+                    <button onClick={toggleIsEditing} className={classes.editBtn}>Edite</button>
+                    <button onClick={() => removeTodo(id)} className={classes.deleteBtn}>Delete</button>
+                    {/* <IconButton aria-label="Edit" >
+                        <EditIcon color="primary" onClick={toggleIsEditing} />
                     </IconButton>
                     <IconButton onClick={() => removeTodo(id)}>
                         <DeleteIcon aria-label="Delete" color="secondary"  />
-                    </IconButton>        
+                    </IconButton> */}
+                           
                 </ListItemSecondaryAction>
-            </>
+                 
+            
+            </div>
             )} 
         </ListItem>
+        </Paper>
     )
-}
+});
 
-export default Todo;
+export default withStyles(styles) (Todo);

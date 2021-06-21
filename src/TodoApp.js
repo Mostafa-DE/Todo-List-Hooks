@@ -13,7 +13,8 @@ import styles from './Styles/TodoAppStyle';
 
 function TodoApp({classes}) {
     const initialTodos = [{id: 1, task: "Cooding :)", completed: false}]
-    const {todos, addTodo, removeTodo, isCompletedTodo, editTodo} = UseTodoState(initialTodos);
+    const {todos, addTodo, removeTodo, isCompletedTodo, editTodo, onSortEnd} = UseTodoState(initialTodos);
+
 
     return (
         <Paper className={classes.root}>
@@ -43,7 +44,8 @@ function TodoApp({classes}) {
                         todos={todos} 
                         editTodo={editTodo} 
                         removeTodo={removeTodo} 
-                        isCompletedTodo={isCompletedTodo} 
+                        isCompletedTodo={isCompletedTodo}
+                        onSortEnd={onSortEnd}
                     />
                 </Grid>
 
