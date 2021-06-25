@@ -9,10 +9,10 @@ import TodoForm from './TodoForm';
 import UseTodoState from './hooks/UseTodoState';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './Styles/TodoAppStyle';
-
+import uuid from 'uuid/dist/v4';
 
 function TodoApp({classes}) {
-    const initialTodos = [{id: 1, task: "Cooding :)", completed: false}]
+    const initialTodos = [{id: 1, task: "Cooding :)", completed: false, message: false}]
     const {todos, addTodo, removeTodo, isCompletedTodo, editTodo, onSortEnd} = UseTodoState(initialTodos);
 
 
@@ -39,8 +39,9 @@ function TodoApp({classes}) {
                     md={6} 
                     lg={3}
                 >
-                    <TodoForm addTodo={addTodo} />
-                    <TodoList 
+                    <TodoForm addTodo={addTodo} key={uuid()} />
+                    <TodoList
+                        key={uuid()} 
                         todos={todos} 
                         editTodo={editTodo} 
                         removeTodo={removeTodo} 

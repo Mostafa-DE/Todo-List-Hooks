@@ -1,4 +1,7 @@
 const styles = {
+    root: {
+        cursor: "pointer"
+    },
     deleteBtn: {
         background: "none",
         border: "1px solid #f44336",
@@ -7,7 +10,8 @@ const styles = {
         textTransform: "uppercase",
         padding: "0.6rem 0.8rem",
         margin: " 1rem 0 1rem 1rem",
-        fontSize: "0.65rem",
+        fontSize: "0.6rem",
+        fontWeight: "700",
         borderRadius: "6px",
         "&:hover " :{
             backgroundColor: "#ff796110"
@@ -18,10 +22,11 @@ const styles = {
         border: "1px solid #42a5f5",
         cursor: "pointer",
         color: "#42a5f5",
+        fontWeight: "700",
         textTransform: "uppercase",
         padding: "0.6rem 0.8rem",
         margin: " 1rem 0 1rem 1rem",
-        fontSize: "0.65rem",
+        fontSize: "0.6rem",
         borderRadius: "6px",
         "&:hover " :{
             backgroundColor: "rgba(22, 220, 255, 0.035)"
@@ -35,6 +40,9 @@ const styles = {
                 }
             }
         }
+    },
+    snackBar: {
+      marginTop: "3.5rem",
     }
 }
 

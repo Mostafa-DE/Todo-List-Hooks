@@ -32,7 +32,7 @@ function TodoForm({ addTodo , classes }) {
             <Button 
                 type="submit" 
                 variant="outlined" 
-                color="primary" 
+                
                 className={classes.btn} 
             >
                 Add
