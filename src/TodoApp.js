@@ -6,52 +6,43 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
-import UseTodoState from './hooks/UseTodoState';
+// import UseTodoState from './hooks/UseTodoState';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './Styles/TodoAppStyle';
-import uuid from 'uuid/dist/v4';
-
-function TodoApp({classes}) {
-    const initialTodos = [{id: 1, task: "Cooding :)", completed: false, message: false}]
-    const {todos, addTodo, removeTodo, isCompletedTodo, editTodo, onSortEnd} = UseTodoState(initialTodos);
+// import uuid from 'uuid/dist/v4';
+import  TodosProvider  from './contexts/TodosContext';
 
 
-    return (
+function TodoApp({classes}){
+    return(
         <Paper className={classes.root}>
             <AppBar position="static" className={classes.navAppBar}>
                 <Toolbar>
-                    <Typography 
-                        className={classes.navBarText} 
+                    <Typography
+                        className={classes.navBarText}
                         color="inherit"
                     >
-                        To-do List <span>By Mostaf Fayyad</span> 
+                        To-do List <span>By Mostaf Fayyad</span>
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <Grid 
-                container 
-                justify="center" 
+            <Grid
+                container
+                justify="center"
                 className={classes.gridContainer}
             >
                 <Grid
-                    item 
-                    xs={10} 
-                    md={6} 
+                    item
+                    xs={10}
+                    md={6}
                     lg={3}
                 >
-                    <TodoForm addTodo={addTodo} key={uuid()} />
-                    <TodoList
-                        key={uuid()} 
-                        todos={todos} 
-                        editTodo={editTodo} 
-                        removeTodo={removeTodo} 
-                        isCompletedTodo={isCompletedTodo}
-                        onSortEnd={onSortEnd}
-                    />
+                    <TodosProvider>
+                    <TodoForm />
+                    <TodoList />
+                    </TodosProvider>
                 </Grid>
-
             </Grid>
-
         </Paper>
     );
 }

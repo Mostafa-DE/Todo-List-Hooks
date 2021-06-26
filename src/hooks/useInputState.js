@@ -1,8 +1,8 @@
 import {useState} from 'react'
 
-function useInputState(initialState) {
-    const [value, setValue] = useState(initialState);
 
+export default initialState => {
+    const [value, setValue] = useState(initialState);
     const handleChange = (evnt) => {
         setValue(evnt.target.value);
     }
@@ -11,5 +11,3 @@ function useInputState(initialState) {
     }
     return [value, handleChange, reset];
 }
-
-export default useInputState;

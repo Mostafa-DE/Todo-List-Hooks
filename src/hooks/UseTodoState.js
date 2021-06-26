@@ -2,7 +2,7 @@ import UseLocalStorageState from './UseLocalStorageState';
 import uuid from 'uuid/dist/v4';
 import { arrayMove } from "react-sortable-hoc";
   
-const useTodoState = initialTodos => {
+const useTodoState = (initialTodos) => {
     const [todos, setTodos] = UseLocalStorageState("todos",initialTodos);
 
     const addTodo = newTodoText => {

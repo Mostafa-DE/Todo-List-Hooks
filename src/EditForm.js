@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 // import TextField from '@material-ui/core/TextField';
 import useInputState from './hooks/useInputState';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './Styles/EditFormstyle';
+import { TodosContext } from './contexts/TodosContext';
 
-
-function EditForm({editTodo, id, task,toggleEditForm, classes}) {
+function EditForm({id, task,toggleEditForm, classes}){
     const [value, handleChange, reset] = useInputState(task);
+    const { editTodo } = useContext(TodosContext);
     return (
         <div>
             <ValidatorForm onSubmit={ (evnt) => {
@@ -17,20 +18,18 @@ function EditForm({editTodo, id, task,toggleEditForm, classes}) {
                 toggleEditForm();
 
             }}>
-            <TextValidator 
-                value={value} 
-                onChange={handleChange} 
+            <TextValidator
+                value={value}
+                onChange={handleChange}
                 label="update To-do"
                 fullWidth
                 className={classes.inputText}
                 validators={['required']}
                 errorMessages={['Please Enter A To-Do']}
             />
-            <button 
-                type="submit" 
-                
-                 
-                className={classes.updateBtn} 
+            <button
+                type="submit"
+                className={classes.updateBtn}
             >
                 Update
             </button>
