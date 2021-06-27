@@ -5,18 +5,18 @@ import useInputState from './hooks/useInputState';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './Styles/TodoFormStyle';
-import { TodosContext } from './contexts/TodosContext';
+import { DispatchContext } from './contexts/TodosContext';
 
 
 function TodoForm({ classes }) {
     const [value, handleChange, reset] = useInputState("");
-    const { addTodo } = useContext(TodosContext);
+    const dispatch = useContext(DispatchContext);
     return (
         <Paper className={classes.root}>
             
          <ValidatorForm onSubmit={ (evnt) => {
              evnt.preventDefault();
-             addTodo(value);
+             dispatch({ type: "addTodo", task: value})
              reset();
          }}>
             

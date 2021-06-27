@@ -8,7 +8,8 @@ import { TodosContext } from './contexts/TodosContext';
 
 
 const TodoList = SortableContainer(() => {
-    const {todos} = useContext(TodosContext)
+    const todos = useContext(TodosContext);
+
     if(todos.length)
     return (
             <div>
@@ -18,6 +19,7 @@ const TodoList = SortableContainer(() => {
                     <Todo
                         index={i}
                         {...todo} // id and completed and task
+                        
                     />
                     { i < todos.length - 1 ? <Divider /> : ""}
                 </>

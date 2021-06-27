@@ -4,16 +4,17 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import useInputState from './hooks/useInputState';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './Styles/EditFormstyle';
-import { TodosContext } from './contexts/TodosContext';
+import { DispatchContext } from './contexts/TodosContext';
 
 function EditForm({id, task,toggleEditForm, classes}){
+    const dispatch = useContext(DispatchContext);
     const [value, handleChange, reset] = useInputState(task);
-    const { editTodo } = useContext(TodosContext);
+    
     return (
         <div>
             <ValidatorForm onSubmit={ (evnt) => {
                 evnt.preventDefault();
-                editTodo(id,value);
+                dispatch({ type: "editTodo", id: id, newTask: value});
                 reset();
                 toggleEditForm();
 

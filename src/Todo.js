@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, memo} from 'react'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -11,12 +11,12 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './Styles/TodoStyle';
 // import Snackbar from '@material-ui/core/Snackbar';
 // import Alert from '@material-ui/lab/Alert';
-import { TodosContext } from './contexts/TodosContext';
+import { DispatchContext } from './contexts/TodosContext';
 
 
 
 const Todo = SortableElement(({ id, task, completed, classes}) => {
-    const {removeTodo, isCompletedTodo} = useContext(TodosContext);
+    const dispatch = useContext(DispatchContext);
     const [isEditing, toggleIsEditing] = UseToggleState(false);
 
     return (
@@ -37,7 +37,7 @@ const Todo = SortableElement(({ id, task, completed, classes}) => {
                         className={classes.checkBox}
                         tabIndex={-1}
                         checked={completed}
-                        onClick={ () => isCompletedTodo(id)}
+                        onClick={ () => dispatch({ type: "isCompletedTodo", id: id})}
                         color="primary"
                     /> 
                     {task}
@@ -45,7 +45,7 @@ const Todo = SortableElement(({ id, task, completed, classes}) => {
 
                 <ListItemSecondaryAction>
                     <button onClick={toggleIsEditing} className={classes.editBtn}>Edite</button>
-                    <button onClick={() => removeTodo(id)} className={classes.deleteBtn}>Delete</button>             
+                    <button onClick={() => dispatch({ type: "removeTodo", id: id})} className={classes.deleteBtn}>Delete</button>             
                 </ListItemSecondaryAction>
                  
             
@@ -56,4 +56,4 @@ const Todo = SortableElement(({ id, task, completed, classes}) => {
     )
 });
 
-export default withStyles(styles) (Todo);
+export default withStyles(styles) (memo(Todo));
